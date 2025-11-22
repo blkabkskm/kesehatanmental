@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skrining DASS-21</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 10px; }
+        select, input { margin-left: 10px; }
+        button { margin-top: 20px; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        #results { margin-top: 20px; padding: 10px; background-color: #f0f0f0; }
+        .biodata { margin-bottom: 20px; }
+        #rekap { margin-top: 20px; padding: 10px; background-color: #e0e0e0; }
+    </style>
+</head>
+<body>
+       
+        <a href="https://s.id/blkabk-bpn"><img src="logoABK.png" style="width: 35%"></a>
+        <button style="float: right;" type="button" onclick="showRekap()">Tampilkan Rekap (Admin Only)</button>
+
+<h1>Skrining Kesehatan Jiwa dengan DASS-21</h1>
+    <p>Jawab setiap pertanyaan berdasarkan pengalaman Anda dalam seminggu terakhir.</p>
+<p>Skala: 0 = Tidak sama sekali, 1 = Sedikit/kadang-kadang, 2 = Cukup/sering, 3 = Sangat/hampir selalu.</p>
+    <br>
+    <form id="dassForm">
+        <div class="biodata">
+            <h2>Biodata Pengisi</h2>	
+            <label>Nama: <input type="text" id="nama" placeholder="Masukkan nama lengkap"></label><br>
+            <label>TTL (Tempat Tanggal Lahir): <input type="text" id="ttl" placeholder="Contoh: Jakarta, 01 Januari 2000"></label><br>
+            <label>Tanggal Pengisian: <input type="date" id="tanggalPengisian"></label><br>
+            <label>Usia: <input type="number" id="usia" placeholder="Masukkan usia dalam tahun"></label>
+        </div>
+        <br>
+        <h2>Kuesioner DASS-21</h2>
+        <div class="question">1. Saya merasa sulit untuk tenang. <select id="q1"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">2. Saya merasa mulut saya kering. <select id="q2"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">3. Saya tidak merasa ada hal positif yang bisa saya harapkan. <select id="q3"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">4. Saya mengalami kesulitan bernapas (misalnya, napas cepat, sesak napas tanpa aktivitas fisik). <select id="q4"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">5. Saya merasa sulit untuk memulai sesuatu. <select id="q5"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">6. Saya cenderung bereaksi berlebihan terhadap situasi. <select id="q6"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">7. Saya merasa gemetar (misalnya, di tangan). <select id="q7"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">8. Saya merasa bahwa saya menggunakan energi berlebihan untuk khawatir. <select id="q8"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">9. Saya khawatir tentang situasi di mana saya mungkin panik dan membuat diri saya terlihat konyol. <select id="q9"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">10. Saya merasa bahwa saya tidak ada gunanya lagi. <select id="q10"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">11. Saya merasa mudah tersinggung. <select id="q11"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">12. Saya merasa sulit untuk relaksasi. <select id="q12"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">13. Saya merasa sedih dan depresi. <select id="q13"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">14. Saya tidak toleran terhadap hal-hal yang menghalangi saya melakukan apa yang saya lakukan. <select id="q14"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">15. Saya merasa hampir panik. <select id="q15"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">16. Saya tidak bisa merasa antusias tentang apa pun. <select id="q16"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">17. Saya merasa bahwa saya tidak berharga sebagai orang. <select id="q17"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">18. Saya merasa bahwa saya mudah marah. <select id="q18"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">19. Saya menyadari detak jantung saya tanpa aktivitas fisik (misalnya, merasa detak jantung cepat atau tidak teratur). <select id="q19"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">20. Saya merasa takut tanpa alasan yang jelas. <select id="q20"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div class="question">21. Saya merasa bahwa hidup tidak berarti. <select id="q21"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        
+        <button type="button" onclick="calculateScores()">Hitung Skor</button>
+    </form>
+    
+    <h6> (c) 2025 UPTD Balai Layanan Kesehatan Anak Berkebutuhan Khusus Kota Balikpapan </h6>
+    <div id="results"></div>
+    <div id="rekap"></div>
+    <script>
+        // Set tanggal pengisian default ke hari ini
+        document.getElementById('tanggalPengisian').valueAsDate = new Date();
+        
+        function calculateScores() {
+            // Ambil biodata
+            const nama = document.getElementById('nama').value || 'Tidak diisi';
+            const ttl = document.getElementById('ttl').value || 'Tidak diisi';
+            const tanggalPengisian = document.getElementById('tanggalPengisian').value || 'Tidak diisi';
+            const usia = document.getElementById('usia').value || 'Tidak diisi';
+            
+            // Ambil nilai dari form
+            const q = [];
+            for (let i = 1; i <= 21; i++) {
+                q[i] = parseInt(document.getElementById('q' + i).value);
+            }
+            
+            // Hitung skor mentah
+            const depressionRaw = q[3] + q[5] + q[10] + q[13] + q[16] + q[17] + q[21];
+            const anxietyRaw = q[2] + q[4] + q[7] + q[9] + q[15] + q[19] + q[20];
+            const stressRaw = q[1] + q[6] + q[8] + q[11] + q[12] + q[14] + q[18];
+            
+            // Skor akhir (×2)
+            const depression = depressionRaw * 2;
+            const anxiety = anxietyRaw * 2;
+            const stress = stressRaw * 2;
+            
+            // Fungsi untuk kategori
+            function getCategory(aspect, score) {
+                if (aspect === 'depression') {
+                    if (score <= 9) return 'Normal';
+                    if (score <= 13) return 'Ringan';
+                    if (score <= 20) return 'Sedang';
+                    if (score <= 27) return 'Berat';
+                    return 'Sangat Berat';
+                } else if (aspect === 'anxiety') {
+                    if (score <= 7) return 'Normal';
+                    if (score <= 9) return 'Ringan';
+                    if (score <= 14) return 'Sedang';
+                    if (score <= 19) return 'Berat';
+                    return 'Sangat Berat';
+                } else if (aspect === 'stress') {
+                    if (score <= 14) return 'Normal';
+                    if (score <= 18) return 'Ringan';
+                    if (score <= 25) return 'Sedang';
+                    if (score <= 33) return 'Berat';
+                    return 'Sangat Berat';
+                }
+            }
+            
+            // Interpretasi
+            const interpretations = {
+                'Normal': 'Gejala minimal atau tidak ada. Kesehatan jiwa Anda tampak baik.',
+                'Ringan': 'Gejala ringan, mungkin terkait stres harian. Pantau dan kelola dengan relaksasi atau olahraga.',
+                'Sedang': 'Gejala cukup signifikan, bisa memengaruhi fungsi sehari-hari. Pertimbangkan konseling atau dukungan profesional.',
+                'Berat': 'Gejala kuat, mungkin memerlukan intervensi medis seperti terapi atau obat.',
+                'Sangat Berat': 'Gejala ekstrem, risiko tinggi untuk gangguan kesehatan jiwa. Segera cari bantuan ahli (psikiater atau psikolog).'
+            };
+            
+            // Simpan hasil ke local storage
+            const result = {
+                nama,
+                ttl,
+                tanggalPengisian,
+                usia,
+                depression,
+                anxiety,
+                stress,
+                depCat: getCategory('depression', depression),
+                anxCat: getCategory('anxiety', anxiety),
+                strCat: getCategory('stress', stress)
+            };
+            let rekap = JSON.parse(localStorage.getItem('dassRekap')) || [];
+            rekap.push(result);
+            localStorage.setItem('dassRekap', JSON.stringify(rekap));
+            
+            // Tampilkan hasil
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h2>Hasil Skor DASS-21</h2>
+                <h3>Biodata Pengisi</h3>
+                <p><strong>Nama:</strong> ${nama}</p>
+                <p><strong>TTL:</strong> ${ttl}</p>
+                <p><strong>Tanggal Pengisian:</strong> ${tanggalPengisian}</p>
+                <p><strong>Usia:</strong> ${usia} tahun</p>
+                <h3>Skor dan Kategori</h3>
+                <p><strong>Depresi:</strong> Skor ${depression} - Kategori: ${getCategory('depression', depression)}<br>${interpretations[getCategory('depression', depression)]}</p>
+                <p><strong>Kecemasan:</strong> Skor ${anxiety} - Kategori: ${getCategory('anxiety', anxiety)}<br>${interpretations[getCategory('anxiety', anxiety)]}</p>
+                <p><strong>Stres:</strong> Skor ${stress} - Kategori: ${getCategory('stress', stress)}<br>${interpretations[getCategory('stress', stress)]}</p>
+                <p><em>Catatan: Ini bukan diagnosis medis. Jika skor tinggi, konsultasikan dengan profesional kesehatan jiwa.</em></p>
+            `;
+        }
+        
+        function showRekap() {
+            const adminPassword = 'admin123'; // Ganti password ini sesuai keinginan Anda
+            const enteredPassword = prompt('Masukkan password admin untuk melihat rekap:');
+            if (enteredPassword !== adminPassword) {
+                alert('Password salah. Akses ditolak.');
+                return;
+            }
+            
+            const rekap = JSON.parse(localStorage.getItem('dassRekap')) || [];
+            const rekapDiv = document.getElementById('rekap');
+            if (rekap.length === 0) {
+                rekapDiv.innerHTML = '<h2>Rekap Hasil</h2><p>Belum ada data responden.</p>';
+                return;
+            }
+            let html = '<h2>Rekap Hasil Semua Responden</h2><table border="1"><tr><th>Nama</th><th>Usia</th><th>Depresi (Skor/Kategori)</th><th>Kecemasan (Skor/Kategori)</th><th>Stres (Skor/Kategori)</th></tr>';
+            rekap.forEach(item => {
+                html += `<tr><td>${item.nama}</td><td>${item.usia}</td><td>${item.depression} / ${item.depCat}</td><td>${item.anxiety} / ${item.anxCat}</td><td>${item.stress} / ${item.strCat}</td></tr>`;
+            });
+            html += '</table>';
+            rekapDiv.innerHTML = html;
+        }
+        
+        function clearRekap() {
+            const adminPassword = 'admin123'; // Ganti password ini sesuai keinginan Anda
+            const enteredPassword = prompt('Masukkan password admin untuk menghapus rekap:');
+            if (enteredPassword !== adminPassword) {
+                alert('Password salah. Akses ditolak.');
+                return;
+            }
+            localStorage.removeItem('dassRekap');
+            document.getElementById('rekap').innerHTML = '<p>Rekap telah dihapus.</p>';
+        }
+    </script>
+</body>
+</html>
